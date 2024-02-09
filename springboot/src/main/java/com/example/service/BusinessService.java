@@ -94,18 +94,18 @@ public class BusinessService {
      * 登录
      */
     public Account login(Account account) {
-        Account dbAdmin = businessMapper.selectByUsername(account.getUsername());
-        if (ObjectUtil.isNull(dbAdmin)) {
+        Account dbBusiness = businessMapper.selectByUsername(account.getUsername());
+        if (ObjectUtil.isNull(dbBusiness)) {
             throw new CustomException(ResultCodeEnum.USER_NOT_EXIST_ERROR);
         }
-        if (!account.getPassword().equals(dbAdmin.getPassword())) {
+        if (!account.getPassword().equals(dbBusiness.getPassword())) {
             throw new CustomException(ResultCodeEnum.USER_ACCOUNT_ERROR);
         }
         // 生成token
-        String tokenData = dbAdmin.getId() + "-" + RoleEnum.BUSINESS.name();
-        String token = TokenUtils.createToken(tokenData, dbAdmin.getPassword());
-        dbAdmin.setToken(token);
-        return dbAdmin;
+        String tokenData = dbBusiness.getId() + "-" + RoleEnum.BUSINESS.name();
+        String token = TokenUtils.createToken(tokenData, dbBusiness.getPassword());
+        dbBusiness.setToken(token);
+        return dbBusiness;
     }
     /**
      * 注册
@@ -119,14 +119,14 @@ public class BusinessService {
      * 修改密码
      */
     public void updatePassword(Account account) {
-        Business dbAdmin = businessMapper.selectByUsername(account.getUsername());
-        if (ObjectUtil.isNull(dbAdmin)) {
+        Business dbBusiness = businessMapper.selectByUsername(account.getUsername());
+        if (ObjectUtil.isNull(dbBusiness)) {
             throw new CustomException(ResultCodeEnum.USER_NOT_EXIST_ERROR);
         }
-        if (!account.getPassword().equals(dbAdmin.getPassword())) {
+        if (!account.getPassword().equals(dbBusiness.getPassword())) {
             throw new CustomException(ResultCodeEnum.PARAM_PASSWORD_ERROR);
         }
-        dbAdmin.setPassword(account.getNewPassword());
-        businessMapper.updateById(dbAdmin);
+        dbBusiness.setPassword(account.getNewPassword());
+        businessMapper.updateById(dbBusiness);
     }
 }

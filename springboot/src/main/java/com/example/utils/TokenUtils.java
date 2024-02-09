@@ -7,8 +7,10 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.example.common.Constants;
 import com.example.common.enums.RoleEnum;
 import com.example.entity.Account;
+import com.example.entity.User;
 import com.example.service.AdminService;
 import com.example.service.BusinessService;
+import com.example.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -27,7 +29,9 @@ public class TokenUtils {
     private static AdminService staticAdminService;
     //静态的服务对象，可以在类的任何静态方法中使用
 
-    private static BusinessService staticBusiness;
+    private static BusinessService staticBusinessService;
+
+    private static UserService staticUserService;
     //静态的服务对象，可以在类的任何静态方法中使用
     @Resource
     AdminService adminService;
@@ -35,6 +39,8 @@ public class TokenUtils {
     @Resource
     BusinessService businessService;
 
+    @Resource
+    UserService userService;
 
 /**
  * @PostConstruct: 这个注解的作用是在依赖注入完成后，初始化被注解的方法。
@@ -47,7 +53,8 @@ public class TokenUtils {
     @PostConstruct
     public void setUserService() {
         staticAdminService = adminService;
-        staticBusiness = businessService;
+        staticBusinessService = businessService;
+        staticUserService=userService;
     }
     /**
      * 生成token
@@ -72,7 +79,10 @@ public class TokenUtils {
                     return staticAdminService.selectById(Integer.valueOf(userId));
                 }
                 if(RoleEnum.BUSINESS.name().equals(role)){
-                    return staticBusiness.selectById(Integer.valueOf(userId));
+                    return staticBusinessService.selectById(Integer.valueOf(userId));
+                }
+                if(RoleEnum.USER.name().equals(role)){
+                    return staticUserService.selectById(Integer.valueOf(userId));
                 }
             }
         } catch (Exception e) {
