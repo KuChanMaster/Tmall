@@ -17,7 +17,7 @@
       <div class="manager-header-right">
         <el-dropdown placement="bottom">
           <div class="avatar">
-            <img :src="user.avatar || 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png'" />
+            <img @click="goToPerson" :src="user.avatar || 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png'" />
             <div>{{ user.name ||  '管理员' }}</div>
           </div>
           <el-dropdown-menu slot="dropdown">
@@ -87,6 +87,13 @@ export default {
       if (this.user.role === 'ADMIN') {
         this.$router.push('/adminPerson')
       }
+      if(this.user.role==='BUSINESS'){
+        this.$router.push('/businessPerson')
+      }
+      // if(this.user.role==='USER'){
+      //   this.$router.push('')
+      // }
+
     },
     logout() {
       localStorage.removeItem('xm-user')

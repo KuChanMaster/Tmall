@@ -23,9 +23,10 @@
         <div v-else>
           <el-dropdown>
             <div class="front-header-dropdown">
-              <img :src="user.avatar" alt="">
+              <img @click="navToPerson" :src="user.avatar" alt="">
               <div style="margin-left: 10px">
-                <span>{{ user.name }}</span><i class="el-icon-arrow-down" style="margin-left: 5px"></i>
+                <span>{{ user.name }}</span>
+                <i class="el-icon-arrow-down" style="margin-left: 5px"></i>
               </div>
             </div>
             <el-dropdown-menu slot="dropdown">
@@ -86,6 +87,7 @@ export default {
       localStorage.removeItem("xm-user");
       this.$router.push("/login");
     },
+
   }
 
 }

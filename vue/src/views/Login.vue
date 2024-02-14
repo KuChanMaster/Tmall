@@ -10,7 +10,7 @@
           <el-input prefix-icon="el-icon-lock" placeholder="请输入密码" show-password  v-model="form.password"></el-input>
         </el-form-item>
         <el-form-item>
-          <el-select v-model="form.role" placeholder ="请选择角色" style="width: 100%">
+          <el-select  v-model="form.role" placeholder="请选择角色" style="width: 100%">
             <el-option label="管理员" value="ADMIN"></el-option>
             <el-option label="商家" value="BUSINESS"></el-option>
             <el-option label="用户" value="USER"></el-option>

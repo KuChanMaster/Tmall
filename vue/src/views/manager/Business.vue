@@ -1,5 +1,6 @@
 <template>
   <div>
+
     <div class="search">
       <el-input placeholder="请输入账号查询" style="width: 200px" v-model="username"></el-input>
       <el-button type="info" plain style="margin-left: 10px" @click="load(1)">查询</el-button>
@@ -48,9 +49,9 @@
       </div>
     </div>
 
-    <el-dialog title="管理员" :visible.sync="fromVisible" width="40%" :close-on-click-modal="false" destroy-on-close>
+    <el-dialog title="商家信息" :visible.sync="fromVisible" width="40%" :close-on-click-modal="false" destroy-on-close>
       <el-form :model="form" label-width="100px" style="padding-right: 50px" :rules="rules" ref="formRef">
-        <el-form-item label="用户名" prop="username">
+        <el-form-item label="账号" prop="username">
           <el-input v-model="form.username" placeholder="用户名"></el-input>
         </el-form-item>
         <el-form-item label="店铺名" prop="name">
